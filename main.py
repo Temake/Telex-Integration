@@ -3,16 +3,20 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import requests
 import re
 import os
+import dotenv
+
+# Load environment variables from.env file
+dotenv.load_dotenv()
 
 app = FastAPI()
 scheduler = BackgroundScheduler()
 scheduler.start()
 
 # Trello Credentials
-TRELLO_API_KEY = "your_trello_api_key"
-TRELLO_TOKEN = "your_trello_token"
-BOARD_ID = "URHfOfZV"
-LIST_ID = "your_trello_list_id"  # ID of the list where tasks should be created
+TRELLO_API_KEY =os.getenv("TRELLO_API_KEY")
+TRELLO_TOKEN = os.getenv("TRELLO_TOKEN")
+BOARD_ID =os.getenv("BOARD_ID")
+LIST_ID = os.getenv("LIST_ID")
 
 # Function to create a Trello card (task)
 def create_trello_card(task_name: str):
